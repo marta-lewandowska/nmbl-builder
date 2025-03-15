@@ -34,7 +34,7 @@ nmbl-builder-$(VERSION).tar.xz : Makefile
 nmbl-builder: nmbl-builder-$(VR).src.rpm
 
 nmbl-builder-$(VR).src.rpm : nmbl-builder.spec nmbl-builder-$(VERSION).tar.xz
-        rpmbuild $(RPMBUILD_ARGS) -bs $<
+	rpmbuild $(RPMBUILD_ARGS) -bs $<
 
 tarball : nmbl-builder-$(VERSION).tar.xz
 
