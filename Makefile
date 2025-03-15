@@ -31,6 +31,11 @@ install : $(TARGETS)
 nmbl-builder-$(VERSION).tar.xz : Makefile
 	git archive --format=tar --prefix=nmbl-builder-$(VERSION)/ --add-file ../utils.mk HEAD | xz > $@
 
+nmbl-builder: nmbl-builder-$(VR).src.rpm
+
+nmbl-builder-$(VR).src.rpm : nmbl-builder.spec nmbl-builder-$(VERSION).tar.xz
+        rpmbuild $(RPMBUILD_ARGS) -bs $<
+
 tarball : nmbl-builder-$(VERSION).tar.xz
 
 clean :
