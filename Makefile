@@ -29,7 +29,7 @@ install : $(TARGETS)
 	install -m 0600 -t "$(DESTDIR)$(ESPDIR)" $(TARGETS)
 
 nmbl-builder-$(VERSION).tar.xz : Makefile
-	git archive --format=tar --prefix=nmbl-builder-$(VERSION)/ --add-file ../utils.mk HEAD | xz > $@
+	git archive --format=tar --prefix=nmbl-builder-$(VERSION)/ --add-file utils.mk HEAD | xz > $@
 
 nmbl-builder: nmbl-builder-$(VR).src.rpm
 
