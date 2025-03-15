@@ -17,8 +17,8 @@ OS_NAME := $(shell grep '^ID=' /etc/os-release | sed 's/ID=//')
 OS_VERSION := $(shell grep '^VERSION_ID=' /etc/os-release | sed 's/VERSION_ID=//')
 OS_DIST := $(shell rpm --eval '%{dist}')
 VR := $(VERSION)-$(RELEASE)$(OS_DIST)
-KVER := $(ls -1 /lib/modules | tail -n1 | cut -d'-' -f1)
-KREL := $(ls -1 /lib/modules | tail -n1 | cut -d'-' -f2 | cut -d'.' -f1)
+KVER := $(rpm -q kernel-core --qf '%%{VERSION}' | tail -n 1)
+KREL := $(rpm -q kernel-core --qf '%%{RELEASE}' | tail -n 1)
 
 ifeq ($(.DEFAULT_GOAL),)
 .DEFAULT_GOAL := all
