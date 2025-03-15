@@ -17,6 +17,8 @@ OS_NAME := $(shell grep '^ID=' /etc/os-release | sed 's/ID=//')
 OS_VERSION := $(shell grep '^VERSION_ID=' /etc/os-release | sed 's/VERSION_ID=//')
 OS_DIST := $(shell rpm --eval '%{dist}')
 VR := $(VERSION)-$(RELEASE)$(OS_DIST)
+KVER := $(ls -1 /lib/modules | tail -n1 | cut -d'-' -f1)
+KREL := $(ls -1 /lib/modules | tail -n1 | cut -d'-' -f2 | cut -d'.' -f1)
 
 ifeq ($(.DEFAULT_GOAL),)
 .DEFAULT_GOAL := all
@@ -36,6 +38,8 @@ RPMBUILD_ARGS := -D "_topdir $(TOPDIR)" \
 	@sed \
 		-e 's,@@VERSION@@,$(VERSION),g' \
 		-e 's,@@RELEASE@@,$(RELEASE),g' \
+		-e 's,@@KVER@@,$(KVER),g' \
+		-e 's,@@KREL@@,$(KREL),g' \
 		$< > $@
 
 # vim:ft=make
