@@ -1,4 +1,6 @@
 %global debug_package %{nil}
+%global kver %{expand:%(rpm -q kernel-modules --qf '%%{VERSION}' | tail -n 1)}
+%global krel %{expand:%(rpm -q kernel-modules --qf '%%{RELEASE}' | tail -n 1)}
 
 Summary: nmbl proof of concept as a package
 Name: nmbl-builder
@@ -41,8 +43,8 @@ the linux kernel and grub-emu, using either switchroot or kexec.
 
 %package -n nmbl
 Summary: nmbl proof of concept as a package
-Version: @@KVER@@ 
-Release: @@KREL@@
+Version: %{kver}
+Release: %{krel}
 
 %description -n nmbl
 nmbl-poc is a proof of concept for a bootloader for UEFI machines based on
