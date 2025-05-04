@@ -32,7 +32,10 @@ nmbl-$(KVRA).rpm :
 rpm: nmbl-$(KVRA).rpm
 
 nmbl-builder-$(VERSION).tar.xz : Makefile
-	git archive --format=tar --prefix=nmbl-builder-$(VERSION)/ --add-file utils.mk HEAD | xz > $@
+	git archive --format=tar --prefix=nmbl-builder-$(VERSION)/ --add-file utils.mk \
+		--add-file make_efi_entries \
+		--add-file install_bootloader \
+		HEAD | xz > $@
 
 nmbl-builder: nmbl-builder-$(VR).src.rpm
 
