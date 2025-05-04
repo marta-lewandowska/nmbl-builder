@@ -7,7 +7,7 @@
 TOPDIR ?= .
 include $(TOPDIR)/utils.mk
 
-TARGETS = nmbl-cloud.uki nmbl-megalith.uki nmbl-workstation.uki
+TARGETS = nmbl-cloud.uki nmbl-workstation.uki
 
 all: $(TARGETS)
 
@@ -25,8 +25,8 @@ nmbl-%.uki : %.initramfs.img
                 "$*.initramfs.img"
 
 install : $(TARGETS)
-	install -m 0700 -d "$(DESTDIR)$(ESPDIR)"
-	install -m 0600 -t "$(DESTDIR)$(ESPDIR)" $(TARGETS)
+	install -m 0700 -d "$(DESTDIR)$(INSTALL_DIR)"
+	install -m 0600 -t "$(DESTDIR)$(INSTALL_DIR)" $(TARGETS)
 
 nmbl-builder-$(VERSION).tar.xz : Makefile
 	git archive --format=tar --prefix=nmbl-builder-$(VERSION)/ --add-file ../utils.mk HEAD | xz > $@
