@@ -7,7 +7,7 @@
 TOPDIR ?= .
 include $(TOPDIR)/utils.mk
 
-TARGETS = nmbl-cloud.uki nmbl-megalith.uki nmbl-workstation.uki
+TARGETS = nmbl-cloud.uki nmbl-workstation.uki
 
 all: $(TARGETS)
 
@@ -43,8 +43,8 @@ nmbl-builder-$(VR).src.rpm : nmbl-builder.spec nmbl-builder-$(VERSION).tar.xz
 	rpmbuild $(RPMBUILD_ARGS) -bs $<
 
 install : $(TARGETS)
-	install -m 0700 -d "$(DESTDIR)$(ESPDIR)"
-	install -m 0600 -t "$(DESTDIR)$(ESPDIR)" $(TARGETS)
+	install -m 0700 -d "$(DESTDIR)$(INSTALL_DIR)"
+	install -m 0600 -t "$(DESTDIR)$(INSTALL_DIR)" $(TARGETS)
 
 tarball : nmbl-builder-$(VERSION).tar.xz
 

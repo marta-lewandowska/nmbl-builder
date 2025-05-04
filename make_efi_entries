@@ -24,6 +24,10 @@ ESP=$(lsblk -l | grep /boot/efi | cut -d' ' -f1)
 BLKDEV=$(echo ${ESP} | sed 's/[0-9]*$//')
 PARTITION=$(echo ${ESP} | rev | grep -o "^[0-9]*" | rev)
 
-echo -n "\nmbl-cloud.uki $(echo $BOOT_OPTIONS) boot=$(awk '/ \/boot / {print $1}' /etc/fstab) rd.system.gpt_auto=0" | iconv -f UTF8 -t UCS-2LE | efibootmgr -C -d /dev/${BLKDEV} -p ${PARTITION} -L nmbl_switch -l /EFI/${DISTRO}/shim${AR}.efi -@ -
+if [[ $# -eq 0 ]] || [[ ${1} == "cloud" ]]; then
+    echo -n "\nmbl-cloud.uki $(echo $BOOT_OPTIONS) boot=$(awk '/ \/boot / {print $1}' /etc/fstab) rd.system.gpt_auto=0" | iconv -f UTF8 -t UCS-2LE | efibootmgr -C -d /dev/${BLKDEV} -p ${PARTITION} -L nmbl_switch -l /EFI/${DISTRO}/shim${AR}.efi -@ -
+fi
 
-echo -n "\nmbl-workstation.uki $(echo $BOOT_OPTIONS) boot=$(awk '/ \/boot / {print $1}' /etc/fstab) rd.system.gpt_auto=0" | iconv -f UTF8 -t UCS-2LE | efibootmgr -C -d /dev/${BLKDEV} -p ${PARTITION} -L nmbl_kexec -l /EFI/${DISTRO}/shim${AR}.efi -@ -
+if [[ $# -eq 0 ]] || [[ ${1} == "kexec" ]]; then
+    echo -n "\nmbl-workstation.uki $(echo $BOOT_OPTIONS) boot=$(awk '/ \/boot / {print $1}' /etc/fstab) rd.system.gpt_auto=0" | iconv -f UTF8 -t UCS-2LE | efibootmgr -C -d /dev/${BLKDEV} -p ${PARTITION} -L nmbl_kexec -l /EFI/${DISTRO}/shim${AR}.efi -@ -
+fi
