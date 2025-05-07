@@ -33,6 +33,7 @@ BuildRequires: NetworkManager
 BuildRequires: dracut
 BuildRequires: dracut-nmbl
 BuildRequires: dracut-network
+BuildRequires: dracut-config-generic
 BuildRequires: efi-srpm-macros
 BuildRequires: findutils
 BuildRequires: git
