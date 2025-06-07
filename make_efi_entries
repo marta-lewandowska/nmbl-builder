@@ -6,7 +6,7 @@ fi
 
 ARCH=$(uname -m)
 AR=x64
-if [[ $arch = aarch64 ]]; then
+if [[ $ARCH = aarch64 ]]; then
     AR=aa64;
 fi
 
